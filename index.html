@@ -97,29 +97,29 @@
 <!-- ================================================================ -->
 <!-- 2. HEADER / NAVIGATION                                           -->
 <!-- ================================================================ -->
-<header class="bg-white shadow-md sticky top-0 z-50">
+<header id="site-header" class="sticky top-0 z-50 bg-transparent shadow-none transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <!-- Λογότυπο -->
         <a href="#αρχική" class="flex items-center shrink-0">
-            <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-md">
+            <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-md ring-2 ring-white/40">
         </a>
 
         <!-- Μενού desktop -->
-        <nav class="hidden lg:flex items-center gap-8 font-bold text-gray-600">
-            <a href="#αρχική" class="hover:text-kidred transition">Αρχική</a>
-            <a href="#πρόγραμμα" class="hover:text-kidblue transition">Πρόγραμμα</a>
-            <a href="#παροχές" class="hover:text-kidgreen transition">Παροχές</a>
+        <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 font-bold">
+            <a href="#αρχική" data-nav-link class="text-white hover:text-kidyellow transition drop-shadow-md">Αρχική</a>
+            <a href="#πρόγραμμα" data-nav-link class="text-white hover:text-kidyellow transition drop-shadow-md">Πρόγραμμα</a>
+            <a href="#παροχές" data-nav-link class="text-white hover:text-kidyellow transition drop-shadow-md">Παροχές</a>
             <a href="#επικοινωνία" class="bg-kidred text-white px-5 py-2.5 rounded-full hover:bg-red-600 transition shadow-md">Επικοινωνία</a>
         </nav>
 
         <!-- Κουμπί μενού για κινητά -->
-        <button id="menu-btn" class="lg:hidden p-2 text-gray-600" aria-label="Άνοιγμα μενού">
+        <button id="menu-btn" class="lg:hidden p-2 text-white drop-shadow-md" aria-label="Άνοιγμα μενού">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
     </div>
 
     <!-- Μενού κινητών -->
-    <nav id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 px-4 pb-4 flex flex-col gap-1 font-bold text-gray-600">
+    <nav id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-t border-white/20 px-4 pb-4 flex flex-col gap-1 font-bold text-gray-600">
         <a href="#αρχική" class="py-2.5 px-2 rounded-lg hover:bg-red-50 hover:text-kidred transition">Αρχική</a>
         <a href="#πρόγραμμα" class="py-2.5 px-2 rounded-lg hover:bg-blue-50 hover:text-kidblue transition">Πρόγραμμα</a>
         <a href="#παροχές" class="py-2.5 px-2 rounded-lg hover:bg-green-50 hover:text-kidgreen transition">Παροχές</a>
@@ -130,7 +130,7 @@
 <!-- ================================================================ -->
 <!-- 3. HERO SECTION                                                  -->
 <!-- ================================================================ -->
-<section id="αρχική" class="relative bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1600&q=80');">
+<section id="αρχική" class="relative -mt-24 md:-mt-28 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1600&q=80');">
     <!-- Σκούρο overlay για αναγνωσιμότητα -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/60"></div>
 
@@ -729,9 +729,33 @@
 <!-- JAVASCRIPT                                                        -->
 <!-- ================================================================ -->
 <script>
-    // --- Μενού κινητών ---
+    const siteHeader = document.getElementById('site-header');
+    const navLinks = document.querySelectorAll('[data-nav-link]');
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+
+    function updateHeaderOnScroll() {
+        const scrolled = window.scrollY > 80;
+
+        siteHeader.classList.toggle('bg-white', scrolled);
+        siteHeader.classList.toggle('shadow-md', scrolled);
+        siteHeader.classList.toggle('bg-transparent', !scrolled);
+
+        navLinks.forEach((link) => {
+            link.classList.toggle('text-white', !scrolled);
+            link.classList.toggle('drop-shadow-md', !scrolled);
+            link.classList.toggle('text-gray-600', scrolled);
+            link.classList.toggle('hover:text-kidred', scrolled);
+            link.classList.toggle('hover:text-kidyellow', !scrolled);
+        });
+
+        menuBtn.classList.toggle('text-white', !scrolled);
+        menuBtn.classList.toggle('drop-shadow-md', !scrolled);
+        menuBtn.classList.toggle('text-gray-600', scrolled);
+    }
+
+    window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
+    updateHeaderOnScroll();
 
     menuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
