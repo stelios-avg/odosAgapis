@@ -96,7 +96,7 @@
 <!-- ================================================================ -->
 <!-- 1. TOP BAR                                                       -->
 <!-- ================================================================ -->
-<div class="bg-gray-900 text-gray-200 text-sm">
+<div class="bg-gray-900 text-gray-200 text-sm relative z-10">
     <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col sm:flex-row items-center justify-between gap-2">
         <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
             <a href="tel:+35799193971" class="flex items-center gap-1.5 hover:text-kidyellow transition">
@@ -128,26 +128,19 @@
 <!-- ================================================================ -->
 <header id="site-header" class="sticky top-0 z-50 bg-transparent shadow-none transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <!-- Λογότυπο -->
         <a href="#αρχική" class="flex items-center shrink-0">
             <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-md ring-2 ring-white/40">
         </a>
-
-        <!-- Μενού desktop -->
         <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 font-bold">
             <a href="#αρχική" data-nav-link class="text-white hover:text-kidyellow transition drop-shadow-md">Αρχική</a>
             <a href="#πρόγραμμα" data-nav-link class="text-white hover:text-kidyellow transition drop-shadow-md">Πρόγραμμα</a>
             <a href="#παροχές" data-nav-link class="text-white hover:text-kidyellow transition drop-shadow-md">Παροχές</a>
             <a href="#επικοινωνία" class="bg-kidred text-white px-5 py-2.5 rounded-full hover:bg-red-600 transition shadow-md">Επικοινωνία</a>
         </nav>
-
-        <!-- Κουμπί μενού για κινητά -->
         <button id="menu-btn" class="lg:hidden p-2 text-white drop-shadow-md" aria-label="Άνοιγμα μενού">
             <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
     </div>
-
-    <!-- Μενού κινητών -->
     <nav id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-t border-white/20 px-4 pb-4 flex flex-col gap-1 font-bold text-gray-600">
         <a href="#αρχική" class="py-2.5 px-2 rounded-lg hover:bg-red-50 hover:text-kidred transition">Αρχική</a>
         <a href="#πρόγραμμα" class="py-2.5 px-2 rounded-lg hover:bg-blue-50 hover:text-kidblue transition">Πρόγραμμα</a>
@@ -159,11 +152,10 @@
 <!-- ================================================================ -->
 <!-- 3. HERO SECTION                                                  -->
 <!-- ================================================================ -->
-<section id="αρχική" class="relative -mt-24 md:-mt-28 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1600&q=80');">
-    <!-- Σκούρο overlay για αναγνωσιμότητα -->
+<section id="αρχική" class="relative -mt-[7.75rem] md:-mt-[8.5rem] bg-cover bg-center -translate-y-px" style="background-image: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1600&q=80');">
     <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/60"></div>
 
-    <div class="relative max-w-4xl mx-auto px-4 pt-24 pb-44 md:pt-32 md:pb-56 text-center text-white">
+    <div class="relative max-w-4xl mx-auto px-4 pt-[7.75rem] pb-44 md:pt-[8.5rem] md:pb-56 text-center text-white">
         <span class="inline-block bg-kidyellow text-gray-900 font-bold px-4 py-1.5 rounded-full text-sm mb-6 animate-float">☀️ Χαρά, παιχνίδι &amp; μάθηση κάθε μέρα!</span>
         <h1 class="text-4xl md:text-6xl font-semibold leading-tight mb-5 drop-shadow-lg">
             Καλώς ήρθατε στον Βρεφονηπιακό μας Σταθμό!
