@@ -129,7 +129,7 @@
 <header id="site-header" class="sticky top-0 z-50 bg-transparent shadow-none transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#αρχική" class="flex items-center shrink-0">
-            <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-md ring-2 ring-white/40">
+            <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-20 h-20 md:w-24 md:h-24 rounded-full object-contain shadow-md ring-2 ring-white/40 bg-white">
         </a>
         <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 font-bold">
             <a href="#αρχική" data-nav-link class="text-white hover:text-kidyellow transition drop-shadow-md">Αρχική</a>
@@ -459,65 +459,104 @@
 <!-- ================================================================ -->
 <section id="πρόγραμμα" class="py-16 md:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-14">
+        <div class="text-center mb-10">
             <span class="text-kidgreen font-bold uppercase tracking-widest text-sm">Κάθε εβδομάδα</span>
             <h2 class="text-3xl md:text-5xl font-semibold text-gray-800 mt-3">Εβδομαδιαίο Πρόγραμμα</h2>
+            <p class="mt-4 text-lg text-gray-500">Παίζουμε, μαθαίνουμε, μεγαλώνουμε μαζί!</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-            <!-- Δευτέρα -->
-            <div class="rounded-2xl overflow-hidden shadow-md bg-red-50">
-                <div class="bg-kidred text-white text-center font-titles font-semibold py-3">Δευτέρα</div>
-                <div class="p-4 text-center space-y-3">
-                    <div><p class="font-bold text-gray-800">Ζωγραφική</p><p class="text-sm text-gray-500">08:00 – 10:00</p></div>
-                    <div><p class="font-bold text-gray-800">Παραμύθι</p><p class="text-sm text-gray-500">11:00 – 12:00</p></div>
-                </div>
+        <div class="overflow-x-auto rounded-3xl shadow-lg border border-gray-100">
+            <table class="w-full min-w-[860px] text-sm md:text-base text-center border-collapse">
+                <thead>
+                    <tr class="font-titles">
+                        <th class="bg-gray-800 text-white py-3 px-3 w-32">Ώρα</th>
+                        <th class="bg-kidred text-white py-3 px-3">Δευτέρα</th>
+                        <th class="bg-kidblue text-white py-3 px-3">Τρίτη</th>
+                        <th class="bg-kidgreen text-white py-3 px-3">Τετάρτη</th>
+                        <th class="bg-kidpurple text-white py-3 px-3">Πέμπτη</th>
+                        <th class="bg-kidorange text-white py-3 px-3">Παρασκευή</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <tr class="bg-yellow-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">07:00 – 08:30</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Υποδοχή παιδιών – Ελεύθερο παιχνίδι</td>
+                    </tr>
+                    <tr class="bg-orange-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">08:30 – 09:00</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Πρωινό – Συζήτηση – Ημερολόγιο</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold py-3 px-2 whitespace-nowrap bg-gray-50">09:00 – 10:00</td>
+                        <td class="py-3 px-2 bg-red-50 font-semibold">Δημιουργική Απασχόληση</td>
+                        <td class="py-3 px-2 bg-blue-50 font-semibold">Μουσική &amp; Κίνηση</td>
+                        <td class="py-3 px-2 bg-green-50 font-semibold">Γλώσσα &amp; Παραμύθι</td>
+                        <td class="py-3 px-2 bg-purple-50 font-semibold">Μαθηματικά μέσα από το παιχνίδι</td>
+                        <td class="py-3 px-2 bg-orange-50 font-semibold">STEAM Δραστηριότητες</td>
+                    </tr>
+                    <tr class="bg-amber-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">10:00 – 10:30</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Δεκατιανό</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold py-3 px-2 whitespace-nowrap bg-gray-50">10:30 – 11:30</td>
+                        <td class="py-3 px-2 bg-red-50 font-semibold">Παιχνίδι σε σταθμούς</td>
+                        <td class="py-3 px-2 bg-blue-50 font-semibold">Εικαστικά</td>
+                        <td class="py-3 px-2 bg-green-50 font-semibold">Κουκλοθέατρο / Θεατρικό παιχνίδι</td>
+                        <td class="py-3 px-2 bg-purple-50 font-semibold">Κίνηση &amp; Παιχνίδια στην αυλή</td>
+                        <td class="py-3 px-2 bg-orange-50 font-semibold">Αισθητηριακό Παιχνίδι</td>
+                    </tr>
+                    <tr class="bg-sky-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">11:30 – 12:00</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Κύκλος – Τραγούδια – Συζήτηση</td>
+                    </tr>
+                    <tr class="bg-lime-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">12:00 – 12:45</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Μεσημεριανό γεύμα</td>
+                    </tr>
+                    <tr class="bg-indigo-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">12:45 – 14:30</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Ώρα ανάπαυσης – Ύπνος</td>
+                    </tr>
+                    <tr class="bg-pink-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">14:30 – 15:00</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Απογευματινό – Φρούτο</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold py-3 px-2 whitespace-nowrap bg-gray-50">15:00 – 16:00</td>
+                        <td class="py-3 px-2 bg-red-50 font-semibold">Κατασκευές με φυσικά υλικά</td>
+                        <td class="py-3 px-2 bg-blue-50 font-semibold">Μάθημα Υγιεινής Διατροφής</td>
+                        <td class="py-3 px-2 bg-green-50 font-semibold">Ιστορίες &amp; Βιβλιοθήκη</td>
+                        <td class="py-3 px-2 bg-purple-50 font-semibold">Μικροί Σεφ</td>
+                        <td class="py-3 px-2 bg-orange-50 font-semibold">Παιχνίδια νερού / αισθήσεων</td>
+                    </tr>
+                    <tr class="bg-rose-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">16:00 – 16:15</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Κύκλος αποχαιρετισμού</td>
+                    </tr>
+                    <tr class="bg-yellow-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">16:15 – 17:00</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Ελεύθερο παιχνίδι</td>
+                    </tr>
+                    <tr class="bg-slate-50">
+                        <td class="font-bold py-3 px-2 whitespace-nowrap">17:00 – 17:30</td>
+                        <td colspan="5" class="py-3 px-3 font-semibold">Ήρεμο παιχνίδι / Βιβλία – Αναχώρηση</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="mt-3 text-center text-sm text-gray-400 lg:hidden">Σύρετε τον πίνακα δεξιά για να δείτε όλες τις ημέρες →</p>
+
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+            <div class="rounded-2xl bg-pink-100 p-6 text-center">
+                <p class="font-titles text-xl font-semibold text-pink-800">Σάββατο &amp; Κυριακή</p>
+                <p class="mt-2 text-lg font-bold text-kidred">Κλειστά</p>
+                <p class="mt-1 text-gray-600">Ο σταθμός μας δεν λειτουργεί το Σάββατο και την Κυριακή.</p>
             </div>
-            <!-- Τρίτη -->
-            <div class="rounded-2xl overflow-hidden shadow-md bg-blue-50">
-                <div class="bg-kidblue text-white text-center font-titles font-semibold py-3">Τρίτη</div>
-                <div class="p-4 text-center space-y-3">
-                    <div><p class="font-bold text-gray-800">Κατασκευές</p><p class="text-sm text-gray-500">09:00 – 10:30</p></div>
-                    <div><p class="font-bold text-gray-800">Μουσική</p><p class="text-sm text-gray-500">11:30 – 12:30</p></div>
-                </div>
+            <div class="rounded-2xl bg-green-50 p-6">
+                <p class="font-titles text-xl font-semibold text-green-800 mb-2">Με αγάπη, φροντίδα και ασφάλεια</p>
+                <p class="text-gray-600">Οι δομημένες δραστηριότητες (μουσική, εικαστικά, STEAM) εναλλάσσονται με ελεύθερο παιχνίδι, ώστε κάθε παιδί να μαθαίνει με χαρά και στον δικό του ρυθμό.</p>
             </div>
-            <!-- Τετάρτη -->
-            <div class="rounded-2xl overflow-hidden shadow-md bg-green-50">
-                <div class="bg-kidgreen text-white text-center font-titles font-semibold py-3">Τετάρτη</div>
-                <div class="p-4 text-center space-y-3">
-                    <div><p class="font-bold text-gray-800">Κηπουρική</p><p class="text-sm text-gray-500">08:30 – 10:00</p></div>
-                    <div><p class="font-bold text-gray-800">Θέατρο</p><p class="text-sm text-gray-500">11:00 – 12:30</p></div>
-                </div>
-            </div>
-            <!-- Πέμπτη -->
-            <div class="rounded-2xl overflow-hidden shadow-md bg-purple-50">
-                <div class="bg-kidpurple text-white text-center font-titles font-semibold py-3">Πέμπτη</div>
-                <div class="p-4 text-center space-y-3">
-                    <div><p class="font-bold text-gray-800">Κατασκευές</p><p class="text-sm text-gray-500">08:00 – 09:30</p></div>
-                    <div><p class="font-bold text-gray-800">Χορός</p><p class="text-sm text-gray-500">10:30 – 12:00</p></div>
-                </div>
-            </div>
-            <!-- Παρασκευή -->
-            <div class="rounded-2xl overflow-hidden shadow-md bg-orange-50">
-                <div class="bg-kidorange text-white text-center font-titles font-semibold py-3">Παρασκευή</div>
-                <div class="p-4 text-center space-y-3">
-                    <div><p class="font-bold text-gray-800">Γυμναστική</p><p class="text-sm text-gray-500">08:30 – 10:00</p></div>
-                    <div><p class="font-bold text-gray-800">Μαγειρική</p><p class="text-sm text-gray-500">11:00 – 12:30</p></div>
-                </div>
-            </div>
-            <!-- Σάββατο -->
-            <div class="rounded-2xl overflow-hidden shadow-md bg-yellow-50">
-                <div class="bg-kidyellow text-gray-900 text-center font-titles font-semibold py-3">Σάββατο</div>
-                <div class="p-4 text-center space-y-3">
-                    <div><p class="font-bold text-gray-800">Κλειστά</p><p class="text-sm text-gray-500">Χωρίς λειτουργία</p></div>
-                </div>
-            </div>
-            <!-- Κυριακή -->
-            <div class="rounded-2xl overflow-hidden shadow-md bg-pink-50">
-                <div class="bg-pink-400 text-white text-center font-titles font-semibold py-3">Κυριακή</div>
-                <div class="p-4 text-center space-y-3">
-                    <div><p class="font-bold text-gray-800">Ξεκούραση 😴</p><p class="text-sm text-gray-500">Κλειστά</p></div>
-                </div>
             </div>
         </div>
     </div>
@@ -791,7 +830,7 @@
 
     <div class="max-w-4xl mx-auto px-4 pt-24 pb-10 text-center">
         <!-- Λογότυπο -->
-        <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-28 h-28 mx-auto rounded-full shadow-xl ring-4 ring-white/40 object-cover">
+        <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-28 h-28 mx-auto rounded-full shadow-xl ring-4 ring-white/40 object-contain bg-white">
         <p class="font-titles text-3xl font-semibold mt-4">Οδός Αγάπης</p>
         <p class="text-purple-200 mt-1">Βρεφονηπιακός Σταθμός</p>
 
@@ -803,7 +842,7 @@
             </div>
             <div>
                 <p class="font-bold text-white mb-1">🕒 Ώρες λειτουργίας</p>
-                <p>Δευτέρα – Παρασκευή:<br>06:30 – 17:30<br>Σάββατο: Κλειστά</p>
+                <p>Δευτέρα – Παρασκευή:<br>7:00 π.μ. – 5:30 μ.μ.<br>Σάββατο &amp; Κυριακή: Κλειστά</p>
             </div>
             <div>
                 <p class="font-bold text-white mb-1">📞 Τηλέφωνα</p>
