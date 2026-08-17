@@ -465,7 +465,20 @@
             <p class="mt-4 text-lg text-gray-500">Παίζουμε, μαθαίνουμε, μεγαλώνουμε μαζί!</p>
         </div>
 
-        <div class="overflow-x-auto rounded-3xl shadow-lg border border-gray-100">
+        <!-- Κινητό: μία ημέρα κάθε φορά, κάθετη λίστα -->
+        <div class="lg:hidden">
+            <div id="schedule-day-tabs" class="flex gap-2 overflow-x-auto pb-4 -mx-1 px-1" role="tablist" aria-label="Ημέρα προγράμματος">
+                <button type="button" data-day="0" class="schedule-tab shrink-0 px-4 py-2.5 rounded-full font-bold text-sm bg-kidred text-white shadow-md" aria-selected="true">Δευτέρα</button>
+                <button type="button" data-day="1" class="schedule-tab shrink-0 px-4 py-2.5 rounded-full font-bold text-sm bg-gray-100 text-gray-600" aria-selected="false">Τρίτη</button>
+                <button type="button" data-day="2" class="schedule-tab shrink-0 px-4 py-2.5 rounded-full font-bold text-sm bg-gray-100 text-gray-600" aria-selected="false">Τετάρτη</button>
+                <button type="button" data-day="3" class="schedule-tab shrink-0 px-4 py-2.5 rounded-full font-bold text-sm bg-gray-100 text-gray-600" aria-selected="false">Πέμπτη</button>
+                <button type="button" data-day="4" class="schedule-tab shrink-0 px-4 py-2.5 rounded-full font-bold text-sm bg-gray-100 text-gray-600" aria-selected="false">Παρασκευή</button>
+            </div>
+            <ol id="mobile-schedule" class="bg-gray-50 rounded-3xl p-4 space-y-3 shadow-inner"></ol>
+        </div>
+
+        <!-- Desktop: πλήρης πίνακας -->
+        <div class="hidden lg:block overflow-x-auto rounded-3xl shadow-lg border border-gray-100">
             <table class="w-full min-w-[860px] text-sm md:text-base text-center border-collapse">
                 <thead>
                     <tr class="font-titles">
@@ -545,7 +558,6 @@
                 </tbody>
             </table>
         </div>
-        <p class="mt-3 text-center text-sm text-gray-400 lg:hidden">Σύρετε τον πίνακα δεξιά για να δείτε όλες τις ημέρες →</p>
 
         <div class="mt-8 grid md:grid-cols-2 gap-6">
             <div class="rounded-2xl bg-pink-100 p-6 text-center">
@@ -944,6 +956,64 @@
 
     // Αυτόματη εναλλαγή κάθε 8 δευτερόλεπτα
     setInterval(() => showTestimonial(currentTestimonial + 1), 8000);
+
+    // --- Πρόγραμμα κινητού: μία ημέρα κάθε φορά ---
+    const scheduleDays = [
+        { name: 'Δευτέρα', color: 'bg-kidred', ring: 'ring-kidred', slots: ['Δημιουργική Απασχόληση', 'Παιχνίδι σε σταθμούς', 'Κατασκευές με φυσικά υλικά'] },
+        { name: 'Τρίτη', color: 'bg-kidblue', ring: 'ring-kidblue', slots: ['Μουσική & Κίνηση', 'Εικαστικά', 'Μάθημα Υγιεινής Διατροφής'] },
+        { name: 'Τετάρτη', color: 'bg-kidgreen', ring: 'ring-kidgreen', slots: ['Γλώσσα & Παραμύθι', 'Κουκλοθέατρο / Θεατρικό παιχνίδι', 'Ιστορίες & Βιβλιοθήκη'] },
+        { name: 'Πέμπτη', color: 'bg-kidpurple', ring: 'ring-kidpurple', slots: ['Μαθηματικά μέσα από το παιχνίδι', 'Κίνηση & Παιχνίδια στην αυλή', 'Μικροί Σεφ'] },
+        { name: 'Παρασκευή', color: 'bg-kidorange', ring: 'ring-kidorange', slots: ['STEAM Δραστηριότητες', 'Αισθητηριακό Παιχνίδι', 'Παιχνίδια νερού / αισθήσεων'] },
+    ];
+    const scheduleShared = [
+        { time: '07:00 – 08:30', title: 'Υποδοχή παιδιών – Ελεύθερο παιχνίδι' },
+        { time: '08:30 – 09:00', title: 'Πρωινό – Συζήτηση – Ημερολόγιο' },
+        { time: '09:00 – 10:00', special: 0 },
+        { time: '10:00 – 10:30', title: 'Δεκατιανό' },
+        { time: '10:30 – 11:30', special: 1 },
+        { time: '11:30 – 12:00', title: 'Κύκλος – Τραγούδια – Συζήτηση' },
+        { time: '12:00 – 12:45', title: 'Μεσημεριανό γεύμα' },
+        { time: '12:45 – 14:30', title: 'Ώρα ανάπαυσης – Ύπνος' },
+        { time: '14:30 – 15:00', title: 'Απογευματινό – Φρούτο' },
+        { time: '15:00 – 16:00', special: 2 },
+        { time: '16:00 – 16:15', title: 'Κύκλος αποχαιρετισμού' },
+        { time: '16:15 – 17:00', title: 'Ελεύθερο παιχνίδι' },
+        { time: '17:00 – 17:30', title: 'Ήρεμο παιχνίδι / Βιβλία – Αναχώρηση' },
+    ];
+    const tabColors = ['bg-kidred', 'bg-kidblue', 'bg-kidgreen', 'bg-kidpurple', 'bg-kidorange'];
+
+    function renderMobileSchedule(dayIndex) {
+        const day = scheduleDays[dayIndex];
+        const list = document.getElementById('mobile-schedule');
+        list.innerHTML = scheduleShared.map((slot) => {
+            const isSpecial = slot.special !== undefined;
+            const title = isSpecial ? day.slots[slot.special] : slot.title;
+            const extra = isSpecial
+                ? `ring-2 ring-offset-2 ring-offset-gray-50 ${day.ring} bg-white`
+                : 'bg-white';
+            return `
+                <li class="rounded-2xl ${extra} p-4 shadow-sm">
+                    <p class="text-xs font-bold text-gray-400">${slot.time}</p>
+                    <p class="mt-1 font-semibold text-gray-800 leading-snug">${title}</p>
+                    ${isSpecial ? '<p class="mt-1 text-xs font-bold text-kidred">Δραστηριότητα ημέρας</p>' : ''}
+                </li>`;
+        }).join('');
+
+        document.querySelectorAll('.schedule-tab').forEach((btn, i) => {
+            const active = i === dayIndex;
+            btn.setAttribute('aria-selected', active ? 'true' : 'false');
+            btn.className = `schedule-tab shrink-0 px-4 py-2.5 rounded-full font-bold text-sm ${active ? `${tabColors[i]} text-white shadow-md` : 'bg-gray-100 text-gray-600'}`;
+        });
+    }
+
+    document.getElementById('schedule-day-tabs').addEventListener('click', (e) => {
+        const btn = e.target.closest('.schedule-tab');
+        if (!btn) return;
+        renderMobileSchedule(Number(btn.dataset.day));
+    });
+
+    const weekday = new Date().getDay();
+    renderMobileSchedule(weekday >= 1 && weekday <= 5 ? weekday - 1 : 0);
 
     // --- Φόρμα επικοινωνίας → email ---
     document.getElementById('contact-form').addEventListener('submit', async (e) => {
