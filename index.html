@@ -98,10 +98,53 @@
                 transform: none !important;
                 transition: none !important;
             }
+            .preloader-heart, .preloader-logo { animation: none !important; }
         }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(165deg, #fde68a 0%, #fbcfe8 42%, #bfdbfe 100%);
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+        }
+        #preloader.is-done {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        @keyframes preloader-pop {
+            0% { transform: scale(0.7); opacity: 0; }
+            70% { transform: scale(1.06); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes preloader-heart {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+            50% { transform: translateY(-18px) rotate(-8deg); opacity: 1; }
+        }
+        .preloader-logo { animation: preloader-pop 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .preloader-heart { animation: preloader-heart 2.4s ease-in-out infinite; }
     </style>
 </head>
 <body class="font-body text-gray-700 bg-white antialiased">
+
+<div id="preloader" role="dialog" aria-label="Καλώς ήρθατε στην Οδό Αγάπης">
+    <span class="preloader-heart absolute top-16 left-[12%] text-4xl" aria-hidden="true">💕</span>
+    <span class="preloader-heart absolute top-24 right-[14%] text-3xl" style="animation-delay: 0.4s" aria-hidden="true">⭐</span>
+    <span class="preloader-heart absolute bottom-24 left-[18%] text-3xl" style="animation-delay: 0.8s" aria-hidden="true">🌈</span>
+    <span class="preloader-heart absolute bottom-20 right-[16%] text-4xl" style="animation-delay: 0.2s" aria-hidden="true">✨</span>
+    <button type="button" id="preloader-enter" class="relative z-10 flex flex-col items-center px-6 text-center">
+        <img src="assets/logo.png" alt="" class="preloader-logo w-40 h-40 md:w-52 md:h-52 rounded-full object-contain bg-white shadow-2xl ring-4 ring-white/80">
+        <p class="font-titles text-3xl md:text-4xl text-gray-800 mt-6">Καλώς ήρθατε</p>
+        <p class="mt-2 text-gray-600 font-semibold">Οδός Αγάπης</p>
+        <p id="preloader-hint" class="mt-5 text-sm md:text-base font-bold text-gray-700 bg-white/70 rounded-full px-5 py-2 shadow-sm">
+            Πατήστε για να μπείτε ♪
+        </p>
+    </button>
+</div>
 
 <!-- ================================================================ -->
 <!-- 1. TOP BAR                                                       -->
@@ -890,6 +933,9 @@
         <p class="mt-10 text-sm text-purple-200 border-t border-white/20 pt-6">
             © 2026 Οδός Αγάπης – Βρεφοκομικός Σταθμός. Με αγάπη για κάθε παιδί. ❤️
         </p>
+        <p class="mt-3 text-sm text-purple-200">
+            Design by <a href="https://www.pixel-studio.design/" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-kidyellow underline underline-offset-2 transition">Pixel-Studio</a>
+        </p>
     </div>
 </footer>
 
@@ -897,6 +943,59 @@
 <!-- JAVASCRIPT                                                        -->
 <!-- ================================================================ -->
 <script>
+    function playWelcomeChime() {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return Promise.resolve();
+        const ctx = new AudioCtx();
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.value = freq;
+            const start = ctx.currentTime + i * 0.16;
+            gain.gain.setValueAtTime(0.0001, start);
+            gain.gain.exponentialRampToValueAtTime(0.08, start + 0.03);
+            gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.55);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(start);
+            osc.stop(start + 0.6);
+        });
+        return ctx.resume();
+    }
+
+    (function initPreloader() {
+        const preloader = document.getElementById('preloader');
+        const enterBtn = document.getElementById('preloader-enter');
+        if (!preloader) return;
+
+        if (sessionStorage.getItem('odosagapis-intro') === '1') {
+            preloader.remove();
+            return;
+        }
+
+        document.documentElement.style.overflow = 'hidden';
+        let closed = false;
+
+        function closePreloader() {
+            if (closed) return;
+            closed = true;
+            sessionStorage.setItem('odosagapis-intro', '1');
+            preloader.classList.add('is-done');
+            document.documentElement.style.overflow = '';
+            setTimeout(() => preloader.remove(), 750);
+        }
+
+        enterBtn.addEventListener('click', () => {
+            playWelcomeChime();
+            closePreloader();
+        });
+
+        playWelcomeChime().catch(() => {});
+        setTimeout(closePreloader, 4500);
+    })();
+
     const siteHeader = document.getElementById('site-header');
     const navLinks = document.querySelectorAll('[data-nav-link]');
     const menuBtn = document.getElementById('menu-btn');
