@@ -16,6 +16,11 @@
     <meta name="twitter:description" content="Ένα χαρούμενο, ασφαλές και δημιουργικό περιβάλλον για τα παιδιά σας.">
     <meta name="twitter:image" content="https://odosagapis.com/assets/logo.png">
     <link rel="icon" type="image/png" href="assets/logo.png">
+    <script>
+        if (/index\.html$/i.test(location.pathname)) {
+            history.replaceState(null, '', location.pathname.replace(/index\.html$/i, '') + location.search + location.hash);
+        }
+    </script>
 
     <!-- Google Fonts: Fredoka (τίτλοι) & Nunito (κείμενο) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

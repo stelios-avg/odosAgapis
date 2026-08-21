@@ -32,15 +32,60 @@
             },
         };
     </script>
+    <style>
+        .book-scene {
+            perspective: 1800px;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #d6c4ae 0%, #c4b09a 100%);
+        }
+        .book-leaf {
+            position: relative;
+            transform-origin: left center;
+            transform-style: preserve-3d;
+            min-height: 100vh;
+            box-shadow: 12px 0 40px rgba(0, 0, 0, 0.18);
+        }
+        .book-front,
+        .book-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .book-back {
+            position: absolute;
+            inset: 0;
+            transform: rotateY(180deg);
+            background:
+                radial-gradient(circle at 30% 25%, #fce7f3 0, transparent 45%),
+                radial-gradient(circle at 80% 70%, #dbeafe 0, transparent 40%),
+                linear-gradient(135deg, #fff7ed, #fdf2f8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .book-leaf.is-turning {
+            animation: book-turn 0.95s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+        }
+        @keyframes book-turn {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(-180deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .book-leaf.is-turning { animation: none; }
+        }
+    </style>
 </head>
-<body class="font-body text-gray-700 bg-gray-50 antialiased">
+<body class="font-body text-gray-700 antialiased">
+
+<div class="book-scene">
+    <div class="book-leaf" id="book-leaf">
+        <div class="book-front bg-gray-50 min-h-screen">
 
 <header class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
-        <a href="index.html" class="flex items-center gap-3 shrink-0">
+        <a href="./" class="js-home-flip flex items-center gap-3 shrink-0">
             <img src="assets/logo.png" alt="Λογότυπο Οδός Αγάπης" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-contain shadow-md bg-white">
         </a>
-        <a href="index.html" class="inline-flex items-center gap-2 font-bold text-kidblue hover:text-kidpurple transition">
+        <a href="./" class="js-home-flip inline-flex items-center gap-2 font-bold text-kidblue hover:text-kidpurple transition">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
             Επιστροφή στην αρχική
         </a>
@@ -172,6 +217,25 @@
         Design by <a href="https://www.pixel-studio.design/" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-kidyellow underline underline-offset-2 transition">Pixel-Studio</a>
     </p>
 </footer>
+        </div>
+        <div class="book-back" aria-hidden="true">
+            <img src="assets/logo.png" alt="" class="w-32 h-32 rounded-full object-contain bg-white shadow-xl">
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.js-home-flip').forEach((link) => {
+        link.addEventListener('click', (e) => {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            e.preventDefault();
+            const leaf = document.getElementById('book-leaf');
+            if (leaf.classList.contains('is-turning')) return;
+            leaf.classList.add('is-turning');
+            setTimeout(() => { window.location.href = link.href; }, 900);
+        });
+    });
+</script>
 
 </body>
 </html>
