@@ -136,19 +136,16 @@
 </head>
 <body class="font-body text-gray-700 bg-white antialiased">
 
-<div id="preloader" role="dialog" aria-label="Καλώς ήρθατε στην Οδό Αγάπης">
+<div id="preloader" role="status" aria-label="Φόρτωση σελίδας">
     <span class="preloader-heart absolute top-16 left-[12%] text-4xl" aria-hidden="true">💕</span>
     <span class="preloader-heart absolute top-24 right-[14%] text-3xl" style="animation-delay: 0.4s" aria-hidden="true">⭐</span>
     <span class="preloader-heart absolute bottom-24 left-[18%] text-3xl" style="animation-delay: 0.8s" aria-hidden="true">🌈</span>
     <span class="preloader-heart absolute bottom-20 right-[16%] text-4xl" style="animation-delay: 0.2s" aria-hidden="true">✨</span>
-    <button type="button" id="preloader-enter" class="relative z-10 flex flex-col items-center px-6 text-center">
+    <div class="relative z-10 flex flex-col items-center px-6 text-center">
         <img src="assets/logo.png" alt="" class="preloader-logo w-40 h-40 md:w-52 md:h-52 rounded-full object-contain bg-white shadow-2xl ring-4 ring-white/80">
         <p class="font-titles text-3xl md:text-4xl text-gray-800 mt-6">Καλώς ήρθατε</p>
         <p class="mt-2 text-gray-600 font-semibold">Οδός Αγάπης</p>
-        <p id="preloader-hint" class="mt-5 text-sm md:text-base font-bold text-gray-700 bg-white/70 rounded-full px-5 py-2 shadow-sm">
-            Πατήστε για να μπείτε ♪
-        </p>
-    </button>
+    </div>
 </div>
 
 <!-- ================================================================ -->
@@ -972,7 +969,6 @@
 
     (function initPreloader() {
         const preloader = document.getElementById('preloader');
-        const enterBtn = document.getElementById('preloader-enter');
         if (!preloader) return;
 
         if (sessionStorage.getItem('odosagapis-intro') === '1') {
@@ -992,13 +988,8 @@
             setTimeout(() => preloader.remove(), 750);
         }
 
-        enterBtn.addEventListener('click', () => {
-            playWelcomeChime();
-            closePreloader();
-        });
-
         playWelcomeChime().catch(() => {});
-        setTimeout(closePreloader, 4500);
+        setTimeout(closePreloader, 2800);
     })();
 
     const siteHeader = document.getElementById('site-header');
