@@ -76,25 +76,23 @@
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
 
-        /* Scroll animations (κυρίως mobile / tablet) */
-        @media (max-width: 1023px) {
-            .scroll-reveal {
-                opacity: 0;
-                transform: translate3d(0, 28px, 0);
-                transition:
-                    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-            }
-            .scroll-reveal.scroll-reveal-scale {
-                transform: translate3d(0, 24px, 0) scale(0.94);
-            }
-            .scroll-reveal.is-visible {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
-            .scroll-reveal.scroll-reveal-scale.is-visible {
-                transform: translate3d(0, 0, 0) scale(1);
-            }
+        /* Scroll animations (mobile και desktop) */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translate3d(0, 28px, 0);
+            transition:
+                opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .scroll-reveal.scroll-reveal-scale {
+            transform: translate3d(0, 24px, 0) scale(0.96);
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+        .scroll-reveal.scroll-reveal-scale.is-visible {
+            transform: translate3d(0, 0, 0) scale(1);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1176,11 +1174,10 @@
         }
     });
 
-    // --- Scroll animations (mobile & tablet) ---
-    function initMobileScrollAnimations() {
-        const isMobileView = window.matchMedia('(max-width: 1023px)').matches;
+    // --- Scroll animations (mobile και desktop) ---
+    function initScrollAnimations() {
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!isMobileView || reduceMotion) return;
+        if (reduceMotion) return;
 
         const marked = new WeakSet();
 
@@ -1239,7 +1236,7 @@
         document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
     }
 
-    initMobileScrollAnimations();
+    initScrollAnimations();
 </script>
 
 </body>
